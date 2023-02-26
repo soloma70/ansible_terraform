@@ -1,0 +1,65 @@
+---
+- name: Install Docker on Remote Hosts
+  hosts: all
+  become: true
+  
+  vars:
+    default_user: ubuntu
+  
+  tasks:
+  - name: Install Aptitude Using Apt
+    apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+  
+  - name: Install Required System Packages
+    apt: name={{ item }} state=latest update_cache=yes
+    loop: [ 
+      'apt-transport-https', 
+      'ca-certificates', 
+      'curl', 
+      'software-properties-common', 
+      'python3-pip', 
+      'virtualenv', 
+      'python3-setuptools'
+      ] 
+  
+  - name: Get Ubuntu release
+    shell: lsb_release -cs
+    register: release_ubuntu
+
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+  
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu {{ release_ubuntu.stdout }} stable
+      state: present
+  
+  - name: Update Apt and Install docker-ce
+    apt: update_cache=yes name=docker-ce state=latest
+  
+  - name: Install Docker Module for Python
+    pip:
+      name: docker
+
+  - name: Add User to Docker Group
+    shell: usermod -aG docker {{ default_user }}
+
+  - name: Restart Docker Service
+    service: name=docker state=restarted
+
+  - name: Check Docker Install
+    shell: docker --version
+    register: res_docker
+  
+  - name: Check Compose Install
+    shell: docker compose version
+    register: res_compose
+
+  - debug:
+      var: res_docker.stdout
+
+  - debug:
+      var: res_compose.stdout
+      
