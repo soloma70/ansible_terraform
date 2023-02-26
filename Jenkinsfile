@@ -19,7 +19,7 @@ pipeline {
                 stage('Clone Repo') {
                     steps{
                         git branch: 'master',
-                            url: 'https://github.com/soloma70/ans_tf.git'        
+                            url: 'https://github.com/soloma70/ansible_terraform.git'        
                         }
                 }
 /* ---------------- Raising the infrastructure on AWS --------------------- */

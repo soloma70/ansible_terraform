@@ -37,7 +37,7 @@ resource "aws_key_pair" "webapp_blog" {
 resource "aws_eip" "webapp_blog" {
   vpc      = true
   instance = aws_instance.webapp_blog.id
-  tags = merge(var.common_tags, { Name = "IP-WebApp-Server-${var.common_tags["Env"]}" })
+  tags = merge(var.common_tags, { Name = "IP-WebApp-${var.common_tags["Env"]}" })
 }
 
 resource "aws_route53_record" "www_webapp_blog" {
@@ -66,7 +66,7 @@ resource "aws_instance" "webapp_blog" {
   monitoring             = var.enable_detailed_monitoring
   depends_on             = [aws_key_pair.webapp_blog]
 
-  tags = merge(var.common_tags, { Name = "WebApp-Server-${var.common_tags["Env"]}" })
+  tags = merge(var.common_tags, { Name = "WebApp-${var.common_tags["Env"]}" })
 }
 
 
@@ -91,5 +91,5 @@ resource "aws_security_group" "webapp_blog" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(var.common_tags, { Name = "SG-WebApp-Server-${var.common_tags["Env"]}" })
+  tags = merge(var.common_tags, { Name = "SG-WebApp-${var.common_tags["Env"]}" })
 }
