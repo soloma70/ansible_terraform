@@ -27,7 +27,7 @@ variable "common_tags" {
   type        = map
   default = {
     Owner       = "Soloma70"
-    Project     = "Web_Blog"
+    Project     = "WebApp_Blog"
     Env = "Prod"
   }
 }
