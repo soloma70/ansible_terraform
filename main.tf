@@ -22,7 +22,7 @@ data "aws_ami" "latest_ubuntu" {
 }
 
 data "aws_arn" "s3_webapp_blog" {
-  arn = "arn:aws:s3::mike-webapp-tfstate"
+  arn = "arn:aws:s3::mike-webapp-blog"
 }
 
 data "aws_route53_zone" "webapp_blog" {
