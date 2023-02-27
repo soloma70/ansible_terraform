@@ -20,11 +20,11 @@ data "aws_ami" "latest_ubuntu" {
     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server*"]
   }
 }
-
+/*
 data "aws_arn" "s3_webapp_blog" {
   arn = "arn:aws:s3::mike-webapp-blog"
 }
-
+*/
 data "aws_route53_zone" "webapp_blog" {
   name = "blog-soloma70.pp.ua."
 }
