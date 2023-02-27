@@ -71,9 +71,9 @@ pipeline {
                         printf "\\n$(terraform output -raw elastic_ip)\\n" > hosts
                         printf "$(terraform output -raw webapp_i_id)\\n" > ids
                         printf "$(terraform output -raw webapp_region)\\n" > region
-                        aws s3 cp hosts s3://soloma-webapp-blog/hosts/hosts
-                        aws s3 cp ids s3://soloma-webapp-blog/hosts/ids
-                        aws s3 cp region s3://soloma-webapp-blog/hosts/region
+                        aws s3 cp hosts s3://mike-webapp-blog/hosts/hosts
+                        aws s3 cp ids s3://mike-webapp-blog/hosts/ids
+                        aws s3 cp region s3://mike-webapp-blog/hosts/region
                         '''
                     }
                 }

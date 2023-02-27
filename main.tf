@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "soloma-webapp-tfstate"
+    bucket = "mike-webapp-blog"
     key    = "terraform/prod/terraform.tfstate"
     region = "eu-central-1"
   }
@@ -22,7 +22,7 @@ data "aws_ami" "latest_ubuntu" {
 }
 
 data "aws_arn" "s3_webapp_blog" {
-  arn = "arn:aws:s3:::soloma-webapp-tfstate"
+  arn = "arn:aws:s3::mike-webapp-tfstate"
 }
 
 data "aws_route53_zone" "webapp_blog" {
